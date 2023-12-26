@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <h1>ganesh</h1>
-      <h2 onClick={handleonsubmit}>click here</h2>
+      <h2 onClick={handleonsubmit}>click here ggg</h2>
       <img src="https://picsum.photos/200/300" alt="hre" />
     </div>
   );
