@@ -2,24 +2,25 @@ import "./App.css";
 
 function App() {
   const handleonsubmit = async () => {
-    const response = await fetch("https://picsum.photos/200/300");
-    // here image is url/location of image
-    // const blob = await response.blob();
-    // const file = new file([blob], "share.jpg", { type: blob.type });
-    // console.log(file);
-    console.log("here");
-    if (navigator.share) {
-      await navigator
-        .share({
-          title: "title",
-          text: "your text",
-          url: "url to share",
-          files: "https://picsum.photos/200/300",
-        })
-        .then(() => console.log("successful share"))
-        .catch((error) => console.log("error in sharing", error));
+    const files = "https://picsum.photos/200/300";
+    if (!navigator.canShare) {
+      console.log("Your browser doesn't support the Web Share API");
+      return;
+    }
+
+    if (navigator.canShare({ files })) {
+      try {
+        await navigator.share({
+          files,
+          title: "Images",
+          text: "Beautiful images",
+        });
+        console.log("shared shared");
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      console.log(`system does not support sharing files.`);
+      console.log("Your system doesn't support sharing these files");
     }
   };
   return (
